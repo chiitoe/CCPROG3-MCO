@@ -37,7 +37,7 @@ public abstract class Character {
      */
     public void displayProfile(){
         System.out.println("=================================================="); //  50
-        System.out.println("ID              : " + this.characterID);
+        System.out.println("Character ID    : " + this.characterID);
         System.out.println("Name            : " + this.name);
         System.out.println("Alias           : " + this.alias);
         System.out.println("Origin          : " + this.origin);
@@ -126,6 +126,11 @@ public abstract class Character {
         }
     }
 
+    /** Purpose: Clears a character's devil fruit power */
+    public void clearDevilFruitPower() {
+        this.devilFruitPower = null;
+    }
+
     /** Helper Methods */
 
     /** Purpose: Abstract class for performDuty.
@@ -147,4 +152,5 @@ public abstract class Character {
     public boolean hasDevilFruit(){
         return devilFruitPower != null;
     }
+
 }

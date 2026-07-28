@@ -35,7 +35,7 @@ public class DevilFruit {
      */
     public void displayFruit(){
         System.out.println("=================================================="); //  50
-        System.out.println("ID              : " + this.fruitID);
+        System.out.println("Fruit ID        : " + this.fruitID);
         System.out.println("Name            : " + this.fruitName);
         System.out.println("Category        : " + this.category);
         System.out.println("Primary Ability : " + this.primaryAbility);

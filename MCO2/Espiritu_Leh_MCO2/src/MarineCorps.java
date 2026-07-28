@@ -89,6 +89,18 @@ public class MarineCorps {
             marine.displayProfile();
         }
     }
+
+    // add to Op Funds
+    public boolean addOpFunds(int amount){
+        if (amount > 0){
+            this.opFunds += amount;
+            return true;
+        }
+
+        else{
+            return false;
+        }
+    }
     
     /* HELPER METHOD
         // Displays the information of the corps and the summary of the marine corps' group attributes.
