@@ -95,6 +95,7 @@ public class PirateCrew {
         }
         return total;
     }
+
     public void viewCrew(){
         System.out.println("Members of " + crewName + ":");
         if(crewMembers.isEmpty()){

@@ -10,10 +10,12 @@ public class BountyDatabase {
         captureRecords = new ArrayList<>();
     }
 
-    private boolean validateCaptor(Character captor, boolean isDead){
+    private boolean validateCaptor(Character captor){
         return !(captor instanceof Pirate); // the captor CANNOT be a pirate
     }
 
+    // MUST be called BEFORE claimBounty and logStatus methods
+    // or alternatively, simply use the registerCapture helper method to automatically call all methods in the right order.
     private void processTargetStatus(Pirate target, boolean isDead){
         Status newStatus = isDead ? Status.DEAD:Status.CAPTURED;
         target.setStatus(newStatus);
@@ -21,6 +23,8 @@ public class BountyDatabase {
         if(isDead && target.getPirateCrew() != null){
             target.getPirateCrew().goodbyeMember(target);
         }
+
+        // bounty deduction from ALIVE && CAPTURED pirates are handled implicitly in the PirateCrew class: total bounty is counted only from ALIVE Pirates
     }
 
     private void claimBounty(Pirate target, Character captor){
@@ -33,12 +37,12 @@ public class BountyDatabase {
     }
 
     private void logStatus(Pirate target, Character captor){
-        CaptureRecord captureRecord = new CaptureRecord(target, captor);
+        CaptureRecord captureRecord = new CaptureRecord(target, captor, target.getStatus());
         captureRecords.add(captureRecord);
     }
 
     public boolean registerCapture(Pirate target, Character captor, boolean isDead){
-        if (validateCaptor(captor, isDead) == true){
+        if (validateCaptor(captor)){
             processTargetStatus(target, isDead);
             claimBounty(target, captor);
             logStatus(target, captor);
