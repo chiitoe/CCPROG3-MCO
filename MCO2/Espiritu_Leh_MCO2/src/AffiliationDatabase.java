@@ -25,7 +25,6 @@ public class AffiliationDatabase {
         PirateCrew crew = new PirateCrew(crewName, shipName, captain);
         pirateCrews.add(crew);
         System.out.println("Created Pirate Crew: " + crew.getCrewName());
-        System.out.println("Created Pirate Crew: " + crew.getCrewName());
         return crew;
     }
     /* HELPER METHOD

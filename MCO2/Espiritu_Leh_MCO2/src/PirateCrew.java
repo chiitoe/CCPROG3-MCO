@@ -24,8 +24,14 @@ public class PirateCrew {
         this.crewID = autoID++;
         this.crewName = (crewName != null && !crewName.isBlank()) ? crewName : "Unnamed crew";
         this.shipName = (shipName != null && !shipName.isBlank()) ? shipName : "Unnamed Ship";
-        this.captain = captain; // A crew cannot be created without a captain
+
         this.crewMembers = new ArrayList<>();
+
+        this.captain = captain; // A crew cannot be created without a captain
+        if (captain != null){
+            recruitMember(captain);
+            captain.toggleCaptain(true);
+        }
     }
 
     // Setters and Getters

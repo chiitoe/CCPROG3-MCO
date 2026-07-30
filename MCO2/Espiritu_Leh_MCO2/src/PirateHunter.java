@@ -46,6 +46,10 @@ public class PirateHunter extends Character {
         this.confirmedCaptures = (confirmedCaptures >= 0) ? confirmedCaptures:0;
     }
 
+    public void incrementConfirmedCaptures(){
+        this.confirmedCaptures++;
+    }
+
     /** Purpose: unique flavour text for pirate-related duties */
     @Override
     public void performDuty() {
