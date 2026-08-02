@@ -97,7 +97,7 @@ public class Controller {
 
     /**
      * Purpose: Intercepts the window close so unsaved work can be written first.
-     * BONUS FEATURE 3 - the registry offers to persist itself on exit.
+     * BONUS FEATURE 3 - Exit Prompt for the Registry
      */
     private void attachExitPrompt(){
         view.addWindowListener(new WindowAdapter(){
@@ -197,7 +197,7 @@ public class Controller {
 
     /**
      * Purpose: Shows the selected character's duty line in a dialog.
-     * BONUS FEATURE 4 - flavour text pulled straight from the polymorphic performDuty.
+     * BONUS FEATURE 4 - text pulled from the performDuty (just a textbox)
      */
     private void performDuty(){
         Character c = selectedCharacter();
@@ -210,7 +210,7 @@ public class Controller {
 
     /**
      * Purpose: Promotes the selected marine one rank.
-     * BONUS FEATURE 5 - exercises the rank ladder from the model.
+     * BONUS FEATURE 5 - implements the rank ladder from the marinerank.
      */
     private void promoteMarine(){
         Character c = selectedCharacter();
