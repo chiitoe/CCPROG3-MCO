@@ -1,3 +1,4 @@
+// ===== MODEL LAYER =====
 import java.util.ArrayList;
 
 /** MarineCorps
@@ -10,7 +11,7 @@ public class MarineCorps {
     private String corpsName;
     private String baseLocation;
     private String corpsCommander;
-    private int opFunds;
+    private long opFunds;
     private final ArrayList<Marine> members;
 
     /** CONSTRUCTOR
@@ -20,9 +21,25 @@ public class MarineCorps {
      * @param corpsCommander falls back to "Unknown Commander" if null/blank
      * @param opFunds falls back to 0 if negative
      */
-    public MarineCorps(String corpsName, String baseLocation, String corpsCommander, int opFunds){
+    public MarineCorps(String corpsName, String baseLocation, String corpsCommander, long opFunds){
         this.corpsID = autoID++;
 
+        this.corpsName = (corpsName != null && !corpsName.isBlank()) ? corpsName : "Unnamed Corps";
+        this.baseLocation = (baseLocation != null && !baseLocation.isBlank()) ? baseLocation : "Unknown Base Location";
+        this.corpsCommander = (corpsCommander != null && !corpsCommander.isBlank()) ? corpsCommander : "Unknown Commander";
+        this.members = new ArrayList<>();
+        this.opFunds = (opFunds >= 0) ? opFunds : 0;
+    }
+
+
+    /** LOAD CONSTRUCTOR
+     * Purpose: Rebuilds a corps from persisted data with its original ID preserved.
+     * Members are re-recruited by the loader afterwards.
+     * @param id the stored corps ID
+     */
+    public MarineCorps(int id, String corpsName, String baseLocation, String corpsCommander, long opFunds){
+        this.corpsID = id;
+        if(id >= autoID) autoID = id + 1;
         this.corpsName = (corpsName != null && !corpsName.isBlank()) ? corpsName : "Unnamed Corps";
         this.baseLocation = (baseLocation != null && !baseLocation.isBlank()) ? baseLocation : "Unknown Base Location";
         this.corpsCommander = (corpsCommander != null && !corpsCommander.isBlank()) ? corpsCommander : "Unknown Commander";
@@ -59,7 +76,7 @@ public class MarineCorps {
      * Purpose: Overwrites the operational fund balance.
      * @param opFunds ignored if negative
      */
-    public void setOpFunds(int opFunds){
+    public void setOpFunds(long opFunds){
         if(opFunds >= 0) this.opFunds = opFunds;
     }
 
@@ -73,7 +90,7 @@ public class MarineCorps {
     /** @return the officer commanding this corps */
     public String getCorpsCommander(){ return this.corpsCommander; }
     /** @return this corps' operational funds in Berries */
-    public int getOpFunds(){ return this.opFunds; }
+    public long getOpFunds(){ return this.opFunds; }
     /** @return a defensive copy of the member list */
     public ArrayList<Marine> getMembers(){
         return new ArrayList<>(this.members);
@@ -124,7 +141,7 @@ public class MarineCorps {
      * @param amount rejected if zero or negative
      * @return true if the funds were credited, false otherwise
      */
-    public boolean addOpFunds(int amount){
+    public boolean addOpFunds(long amount){
         if(amount > 0){
             this.opFunds += amount;
             return true;

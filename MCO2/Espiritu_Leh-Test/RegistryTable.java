@@ -1,4 +1,4 @@
-// ===== VIEW LAYER =====
+// ===== VIEW  =====
 import java.awt.BorderLayout;
 import java.util.List;
 import javax.swing.JPanel;

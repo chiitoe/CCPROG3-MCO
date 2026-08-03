@@ -1,3 +1,4 @@
+// ===== MODEL LAYER =====
 import java.util.ArrayList;
 
 /** AffiliationDatabase
@@ -40,7 +41,7 @@ public class AffiliationDatabase {
      * @return the newly established corps
      */
     public MarineCorps createMarineCorps(String corpsName, String baseLocation,
-                                         String corpsCommander, int operationalFunds){
+                                         String corpsCommander, long operationalFunds){
         MarineCorps corps = new MarineCorps(corpsName, baseLocation, corpsCommander, operationalFunds);
         marineCorps.add(corps);
         System.out.println("Created Marine Corps: " + corps.getCorpsName());
@@ -62,8 +63,22 @@ public class AffiliationDatabase {
         }
     }
 
+    /**
+     * Purpose: Inserts a crew rebuilt from disk, keeping its original ID.
+     * @param c the loaded crew
+     */
+    public void addLoadedCrew(PirateCrew c){ if(c != null) pirateCrews.add(c); }
+
+    /**
+     * Purpose: Inserts a corps rebuilt from disk, keeping its original ID.
+     * @param m the loaded corps
+     */
+    public void addLoadedCorps(MarineCorps m){ if(m != null) marineCorps.add(m); }
+
     // Getters
+    /** @return a defensive copy of the crew list */
     public ArrayList<PirateCrew> getPirateCrews(){ return new ArrayList<>(this.pirateCrews); }
+    /** @return a defensive copy of the corps list */
     public ArrayList<MarineCorps> getMarineCorpsUnits(){ return new ArrayList<>(this.marineCorps); }
 
     /**

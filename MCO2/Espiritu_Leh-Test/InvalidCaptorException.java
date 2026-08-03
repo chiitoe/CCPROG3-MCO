@@ -1,3 +1,4 @@
+// ===== MODEL LAYER =====
 /** InvalidCaptorException
  * Purpose: User-defined CHECKED exception (extends Exception).
  * Thrown when a capture is attempted by an invalid captor, e.g. a Pirate.
@@ -14,4 +15,3 @@ public class InvalidCaptorException extends Exception {
         super(message);
     }
 }
- 

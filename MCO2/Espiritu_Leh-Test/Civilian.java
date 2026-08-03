@@ -1,7 +1,14 @@
+// ===== MODEL LAYER =====
 /** Civilian
  * Purpose: Inherits from Character, holds all information for civilian characters.
  */
 public class Civilian extends Character {
+
+    /** Professions offered in the GUI dropdown. */
+    public static final String[] PROFESSION_OPTIONS = {
+            "Unemployed", "Shipwright", "Bartender", "Scholar", "Merchant", "Fisherman",
+            "Blacksmith", "Farmer", "Hunter", "Doctor", "Innkeeper", "Tailor"
+    };
 
     private String profession;
     private String residence;
@@ -15,9 +22,20 @@ public class Civilian extends Character {
      * @param profession falls back to "Unemployed" if null/blank
      * @param residence falls back to "Homeless" if null/blank
      */
-    public Civilian(String name, String alias, String origin, int wallet, String profession, String residence){
+    public Civilian(String name, String alias, String origin, long wallet, String profession, String residence){
         super(name, alias, origin, wallet);
 
+        this.profession = (profession != null && !profession.isBlank()) ? profession : "Unemployed";
+        this.residence = (residence != null && !residence.isBlank()) ? residence : "Homeless";
+    }
+
+
+    /** LOAD CONSTRUCTOR
+     * Purpose: Rebuilds a civilian from a save file with its original ID preserved.
+     * @param id the stored character ID
+     */
+    public Civilian(int id, String name, String alias, String origin, long wallet, String profession, String residence){
+        super(id, name, alias, origin, wallet);
         this.profession = (profession != null && !profession.isBlank()) ? profession : "Unemployed";
         this.residence = (residence != null && !residence.isBlank()) ? residence : "Homeless";
     }
@@ -49,7 +67,7 @@ public class Civilian extends Character {
         }
     }
 
-    /** Purpose: Prints profession-specific  text for this civilian. */
+    /** Purpose: Prints profession-specific flavor text for this civilian. */
     @Override
     public void performDuty(){
         switch(this.profession){

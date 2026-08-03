@@ -1,3 +1,4 @@
+// ===== MODEL LAYER =====
 /** Character
  * Purpose: Abstract template for characters.
  * Inherited by Pirate, Marine, PirateHunter, and Civilian.
@@ -12,7 +13,7 @@ public abstract class Character {
     private final String origin;
     private Status status;  // Enum prevents typos when comparing/assigning
     private DevilFruit devilFruitPower;
-    private int wallet;
+    private long wallet;
 
     /** CONSTRUCTOR
      * Purpose: Creates a character with an auto-generated ID.
@@ -21,8 +22,29 @@ public abstract class Character {
      * @param origin falls back to "Unknown" if null/blank
      * @param wallet falls back to 0 if negative
      */
-    protected Character(String name, String alias, String origin, int wallet){
+    protected Character(String name, String alias, String origin, long wallet){
         this.characterID = autoID++;        // Returns value THEN increments - first character gets ID 1
+        this.name = (name != null && !name.isBlank()) ? name : "Unknown";
+        this.alias = (alias != null && !alias.isBlank()) ? alias : "Unknown";
+        this.origin = (origin != null && !origin.isBlank()) ? origin : "Unknown";
+        this.status = Status.FREE;
+        this.devilFruitPower = null;
+        this.wallet = (wallet >= 0) ? wallet : 0;
+    }
+
+
+    /** LOAD CONSTRUCTOR
+     * Purpose: Rebuilds a character from persisted data, preserving its original ID and
+     * keeping the shared auto-ID counter ahead of every ID seen so far.
+     * @param id the stored character ID
+     * @param name stored name
+     * @param alias stored alias
+     * @param origin stored origin
+     * @param wallet stored wallet (clamped to >= 0)
+     */
+    protected Character(int id, String name, String alias, String origin, long wallet){
+        this.characterID = id;
+        if(id >= autoID) autoID = id + 1;
         this.name = (name != null && !name.isBlank()) ? name : "Unknown";
         this.alias = (alias != null && !alias.isBlank()) ? alias : "Unknown";
         this.origin = (origin != null && !origin.isBlank()) ? origin : "Unknown";
@@ -57,13 +79,20 @@ public abstract class Character {
     }
 
     // Getters
+    /** @return this character's immutable auto-generated ID */
     public int getCharacterID(){ return this.characterID; }
+    /** @return this character's name */
     public String getName(){ return this.name; }
+    /** @return this character's alias */
     public String getAlias(){ return this.alias; }
+    /** @return this character's place of origin */
     public String getOrigin(){ return this.origin; }
+    /** @return this character's current status */
     public Status getStatus(){ return this.status; }
+    /** @return the devil fruit this character owns, or null if none */
     public DevilFruit getDevilFruitPower(){ return this.devilFruitPower; }
-    public int getWallet(){ return this.wallet; }
+    /** @return this character's current wallet balance in Berries */
+    public long getWallet(){ return this.wallet; }
 
     // Setters
     /**
@@ -105,7 +134,7 @@ public abstract class Character {
      * @param amount rejected if zero or negative
      * @return true if the wallet was credited, false otherwise
      */
-    public boolean addWallet(int amount){
+    public boolean addWallet(long amount){
         if(amount > 0){
             this.wallet += amount;
             return true;
@@ -118,7 +147,7 @@ public abstract class Character {
      * @param amount rejected if it exceeds the current balance
      * @return true if the wallet was debited, false otherwise
      */
-    public boolean deductWallet(int amount){
+    public boolean deductWallet(long amount){
         if(hasEnoughMoney(amount)){
             this.wallet -= amount;
             return true;
@@ -151,7 +180,7 @@ public abstract class Character {
     }
 
     /**
-     * Purpose: Sub-class specific behavior, printed as text.
+     * Purpose: Sub-class specific behaviour, printed as flavour text.
      * Implemented individually by Pirate, Marine, PirateHunter, and Civilian.
      */
     public abstract void performDuty();
@@ -161,7 +190,7 @@ public abstract class Character {
      * @param amount the cost to test against the balance
      * @return true if the balance is greater than or equal to the amount
      */
-    public boolean hasEnoughMoney(int amount){
+    public boolean hasEnoughMoney(long amount){
         return this.wallet >= amount;
     }
 

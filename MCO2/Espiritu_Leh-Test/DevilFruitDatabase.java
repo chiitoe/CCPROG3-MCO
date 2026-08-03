@@ -1,3 +1,4 @@
+// ===== MODEL LAYER =====
 import java.util.ArrayList;
 
 /** DevilFruitDatabase
@@ -52,6 +53,13 @@ public class DevilFruitDatabase {
         return null;
     }
 
+    /**
+     * Purpose: Inserts a fruit rebuilt from disk, keeping its original ID (no printing).
+     * @param f the loaded fruit
+     */
+    public void addLoaded(DevilFruit f){ if(f != null) devilFruits.add(f); }
+
+    /** @return a defensive copy of the fruit registry */
     public ArrayList<DevilFruit> getDevilFruits(){
         return new ArrayList<>(this.devilFruits);
     }

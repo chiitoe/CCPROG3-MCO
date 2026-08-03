@@ -1,3 +1,4 @@
+// ===== MODEL LAYER =====
 import java.util.ArrayList;
 
 /** DevilFruit
@@ -29,6 +30,40 @@ public class DevilFruit {
         this.historicalOwners = new ArrayList<>();
     }
 
+    /** LOAD CONSTRUCTOR
+     * Purpose: Rebuilds a fruit from persisted data with its original ID preserved.
+     * @param id the stored fruit ID
+     */
+    public DevilFruit(int id, String fruitName, Category category, String primaryAbility){
+        this.fruitID = id;
+        if(id >= autoID) autoID = id + 1;
+        this.fruitName = (fruitName != null && !fruitName.isBlank()) ? fruitName : "Unknown";
+        this.category = (category != null) ? category : Category.UNDETERMINED;
+        this.primaryAbility = (primaryAbility != null && !primaryAbility.isBlank()) ? primaryAbility : "Unknown";
+        this.currentOwner = null;
+        this.historicalOwners = new ArrayList<>();
+    }
+
+    /**
+     * Purpose: Restores the current owner during a load, wiring both sides of the link
+     * without the validation assignNewOwner enforces for live assignments.
+     * @param owner the character to restore as current holder
+     */
+    public void restoreCurrentOwner(Character owner){
+        if(owner != null){
+            this.currentOwner = owner;
+            owner.setDevilFruitPower(this);
+        }
+    }
+
+    /**
+     * Purpose: Appends a past owner during a load.
+     * @param owner the historical holder to record
+     */
+    public void restoreHistoricalOwner(Character owner){
+        if(owner != null) this.historicalOwners.add(owner);
+    }
+
     /** Purpose: Prints out the information of a fruit, including its ownership history. */
     public void displayFruit(){
         System.out.println("=================================================="); //  50
@@ -50,11 +85,17 @@ public class DevilFruit {
     }
 
     // Getters
+    /** @return this fruit's immutable auto-generated ID */
     public int getFruitID(){ return this.fruitID; }
+    /** @return this fruit's name */
     public String getFruitName(){ return this.fruitName; }
+    /** @return this fruit's category */
     public Category getCategory(){ return this.category; }
+    /** @return this fruit's primary ability */
     public String getPrimaryAbility(){ return this.primaryAbility; }
+    /** @return the character currently holding this fruit, or null if unowned */
     public Character getCurrentOwner(){ return this.currentOwner; }
+    /** @return a defensive copy of the list of past owners */
     public ArrayList<Character> getHistoricalOwners(){
         return new ArrayList<>(this.historicalOwners);
     }

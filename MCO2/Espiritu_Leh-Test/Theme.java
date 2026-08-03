@@ -11,41 +11,31 @@ import javax.swing.JTable;
 import javax.swing.border.Border;
 
 /** Theme
- * Purpose: Central palette and component factory so every screen shares one
- * One Piece inspired look (deep-sea navy, gold trim, parchment panels).
+ * Purpose: Central palette and component factory so every screen shares it
+ * One Piece inspired look.
  */
 public final class Theme {
 
     /** Purpose: Utility class - never instantiated. */
     private Theme(){ }
 
-    /** Deep ocean background. */
     public static final Color SEA = new Color(11, 37, 69);
-    /** Slightly lighter navy for panels. */
     public static final Color DEEP = new Color(20, 55, 95);
-    /** Treasure gold, used for accents and titles. */
     public static final Color GOLD = new Color(232, 181, 71);
-    /** Jolly Roger red, used for destructive actions. */
     public static final Color RED = new Color(176, 58, 46);
-    /** Old parchment, used for table and form backgrounds. */
     public static final Color PARCHMENT = new Color(247, 239, 219);
-    /** Ink brown for text on parchment. */
     public static final Color INK = new Color(58, 42, 26);
 
-    /** Title font for banners. */
     public static final Font TITLE = new Font("Serif", Font.BOLD, 30);
-    /** Font for section headings. */
     public static final Font HEADING = new Font("Serif", Font.BOLD, 17);
-    /** Font for ordinary labels and fields. */
     public static final Font BODY = new Font("SansSerif", Font.PLAIN, 13);
-    /** Font for buttons. */
     public static final Font BUTTON = new Font("SansSerif", Font.BOLD, 13);
 
     /**
      * Purpose: Builds a themed button.
      * @param text the button caption
      * @param background the fill color
-     * @return a styled, center-aligned button
+     * @return a styled, centered button.
      */
     public static JButton button(String text, Color background){
         JButton b = new JButton(text);
@@ -62,14 +52,14 @@ public final class Theme {
     }
 
     /**
-     * Purpose: Builds a gold action button.
+     * Purpose: Builds a gold button.
      * @param text the button caption
-     * @return a styled button in the primary accent color
+     * @return a button in the  accent color
      */
     public static JButton gold(String text){ return button(text, GOLD); }
 
     /**
-     * Purpose: Builds a red, destructive-action button.
+     * Purpose: Builds a red button.
      * @param text the button caption
      * @return a styled button in the warning color
      */

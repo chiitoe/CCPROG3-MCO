@@ -1,3 +1,4 @@
+// ===== MODEL LAYER =====
 import java.util.ArrayList;
 
 /** PirateCrew
@@ -37,6 +38,21 @@ public final class PirateCrew {
         captain.assignCrew(this);
         captain.toggleCaptain(true);
         this.captain = captain;
+    }
+
+
+    /** LOAD CONSTRUCTOR
+     * Purpose: Rebuilds an empty crew from persisted data with its original ID preserved.
+     * The captain and members are re-attached by the loader afterwards.
+     * @param id the stored crew ID
+     */
+    public PirateCrew(int id, String crewName, String shipName){
+        this.crewID = id;
+        if(id >= autoID) autoID = id + 1;
+        this.crewName = (crewName != null && !crewName.isBlank()) ? crewName : "Unnamed Crew";
+        this.shipName = (shipName != null && !shipName.isBlank()) ? shipName : "Unnamed Ship";
+        this.captain = null;
+        this.crewMembers = new ArrayList<>();
     }
 
     // Setters
@@ -123,8 +139,8 @@ public final class PirateCrew {
      * deduction after a capture is handled implicitly.
      * @return the crew's combined active bounty in Berries
      */
-    public int getTotalBounty(){
-        int total = 0;
+    public long getTotalBounty(){
+        long total = 0;
         for(Pirate pirate : crewMembers){
             if(pirate.getStatus() == Status.FREE){
                 total += pirate.getBounty();
