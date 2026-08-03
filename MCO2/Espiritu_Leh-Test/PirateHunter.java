@@ -1,7 +1,14 @@
+// ===== MODEL LAYER =====
 /** PirateHunter
  * Purpose: Inherits from Character, holds all information for pirate hunter characters.
  */
 public class PirateHunter extends Character {
+
+    /** Combat styles offered in the GUI dropdown. */
+    public static final String[] COMBAT_OPTIONS = {
+            "None", "Swordsmanship", "Devil Fruit", "Haki",
+            "Fish-man Karate", "Black Leg", "Rokushiki"
+    };
 
     private String combatStyle;
     private int confirmedCaptures;
@@ -15,15 +22,28 @@ public class PirateHunter extends Character {
      * @param combatStyle falls back to "None" if null/blank
      * @param confirmedCaptures falls back to 0 if negative
      */
-    public PirateHunter(String name, String alias, String origin, int wallet, String combatStyle, int confirmedCaptures){
+    public PirateHunter(String name, String alias, String origin, long wallet, String combatStyle, int confirmedCaptures){
         super(name, alias, origin, wallet);
 
         this.combatStyle = (combatStyle != null && !combatStyle.isBlank()) ? combatStyle : "None";
         this.confirmedCaptures = (confirmedCaptures >= 0) ? confirmedCaptures : 0;
     }
 
+
+    /** LOAD CONSTRUCTOR
+     * Purpose: Rebuilds a pirate hunter from a save file with its original ID preserved.
+     * @param id the stored character ID
+     */
+    public PirateHunter(int id, String name, String alias, String origin, long wallet, String combatStyle, int confirmedCaptures){
+        super(id, name, alias, origin, wallet);
+        this.combatStyle = (combatStyle != null && !combatStyle.isBlank()) ? combatStyle : "None";
+        this.confirmedCaptures = (confirmedCaptures >= 0) ? confirmedCaptures : 0;
+    }
+
     // Getters
+    /** @return this hunter's combat style */
     public String getCombatStyle(){ return this.combatStyle; }
+    /** @return how many captures this hunter has confirmed */
     public int getConfirmedCaptures(){ return this.confirmedCaptures; }
 
     // Setters
@@ -50,7 +70,7 @@ public class PirateHunter extends Character {
         this.confirmedCaptures++;
     }
 
-    /** Purpose: Prints style-specific text for this hunter. */
+    /** Purpose: Prints style-specific flavour text for this hunter. */
     @Override
     public void performDuty(){
         switch(this.combatStyle){

@@ -1,3 +1,4 @@
+// ===== MODEL LAYER =====
 /** DataPersistenceException
  * Purpose: User-defined CHECKED exception (extends Exception).
  * Wraps low-level IOExceptions so callers deal with one domain-level failure type

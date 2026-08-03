@@ -1,3 +1,4 @@
+// ===== MODEL LAYER =====
 /** CaptureRecord
  * Purpose: Holds the immutable record of a single capture.
  */
@@ -8,7 +9,7 @@ public class CaptureRecord {
     private final Pirate capturedPirate;
     private final Character captor;
     private final Status status;
-    private final int bountyClaimed;
+    private final long bountyClaimed;
 
     /** CONSTRUCTOR
      * Purpose: Initializes a new capture record.
@@ -19,7 +20,7 @@ public class CaptureRecord {
      * @param status the target's resulting status
      * @param bountyClaimed the reward paid out for this capture
      */
-    private CaptureRecord(Pirate capturedPirate, Character captor, Status status, int bountyClaimed){
+    private CaptureRecord(Pirate capturedPirate, Character captor, Status status, long bountyClaimed){
         this.captureId = autoID++;
         this.capturedPirate = capturedPirate;
         this.captor = captor;
@@ -28,16 +29,11 @@ public class CaptureRecord {
     }
 
     // Getters
-    /** @return this record's immutable auto-generated ID */
     public int getCaptureId(){ return this.captureId; }
-    /** @return the pirate who was captured */
     public Pirate getCapturedPirate(){ return this.capturedPirate; }
-    /** @return the character who made the capture */
     public Character getCaptor(){ return this.captor; }
-    /** @return the target's status at the moment of capture */
     public Status getStatus(){ return this.status; }
-    /** @return the bounty paid out for this capture in Berries */
-    public int getBountyClaimed(){ return this.bountyClaimed; }
+    public long getBountyClaimed(){ return this.bountyClaimed; }
 
     /**
      * Purpose: Enforces the rule that a pirate may never claim a bounty.
@@ -77,8 +73,8 @@ public class CaptureRecord {
      * @param captor the character receiving the reward
      * @return the amount paid out in Berries
      */
-    private static int claimBounty(Pirate target, Character captor){
-        int reward = target.getBounty();
+    private static long claimBounty(Pirate target, Character captor){
+        long reward = target.getBounty();
 
         if(captor instanceof Marine marine && marine.getMarineCorps() != null){
             marine.getMarineCorps().addOpFunds(reward);
@@ -116,7 +112,7 @@ public class CaptureRecord {
         validateCaptor(captor);
 
         processTargetStatus(target, isDead);
-        int reward = claimBounty(target, captor);
+        long reward = claimBounty(target, captor);
         return new CaptureRecord(target, captor, target.getStatus(), reward);
     }
 

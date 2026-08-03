@@ -1,3 +1,4 @@
+// ===== MODEL LAYER =====
 import java.util.ArrayList;
 
 /** CharacterDatabase
@@ -24,7 +25,7 @@ public class CharacterDatabase {
      * @param pirateRole falls back to "Unassigned" if null/blank
      * @return the newly registered pirate
      */
-    public Pirate createPirate(String name, String alias, String origin, int wallet, int bounty, String pirateRole){
+    public Pirate createPirate(String name, String alias, String origin, long wallet, long bounty, String pirateRole){
         Pirate pirate = new Pirate(name, alias, origin, wallet, bounty, pirateRole);
         characters.add(pirate);
 
@@ -41,7 +42,7 @@ public class CharacterDatabase {
      * @param marineRank falls back to ENSIGN if null
      * @return the newly registered marine
      */
-    public Marine createMarine(String name, String alias, String origin, int wallet, MarineRank marineRank){
+    public Marine createMarine(String name, String alias, String origin, long wallet, MarineRank marineRank){
         Marine marine = new Marine(name, alias, origin, wallet, marineRank);
         characters.add(marine);
 
@@ -59,7 +60,7 @@ public class CharacterDatabase {
      * @param confirmedCaptures falls back to 0 if negative
      * @return the newly registered pirate hunter
      */
-    public PirateHunter createPirateHunter(String name, String alias, String origin, int wallet,
+    public PirateHunter createPirateHunter(String name, String alias, String origin, long wallet,
                                            String combatStyle, int confirmedCaptures){
         PirateHunter pirateHunter = new PirateHunter(name, alias, origin, wallet, combatStyle, confirmedCaptures);
         characters.add(pirateHunter);
@@ -78,7 +79,7 @@ public class CharacterDatabase {
      * @param residence falls back to "Homeless" if null/blank
      * @return the newly registered civilian
      */
-    public Civilian createCivilian(String name, String alias, String origin, int wallet,
+    public Civilian createCivilian(String name, String alias, String origin, long wallet,
                                    String profession, String residence){
         Civilian civilian = new Civilian(name, alias, origin, wallet, profession, residence);
         characters.add(civilian);
@@ -141,5 +142,12 @@ public class CharacterDatabase {
         return null;
     }
 
+    /**
+     * Purpose: Inserts a character rebuilt from disk, keeping its original ID (no printing).
+     * @param c the loaded character
+     */
+    public void addLoaded(Character c){ if(c != null) characters.add(c); }
+
+    /** @return a defensive copy of the character roster */
     public ArrayList<Character> getCharacters(){ return new ArrayList<>(this.characters); }
 }

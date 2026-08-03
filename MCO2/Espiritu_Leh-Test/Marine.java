@@ -1,3 +1,4 @@
+// ===== MODEL LAYER =====
 /** Marine
  * Purpose: Inherits from Character, holds all information for marine characters.
  */
@@ -14,10 +15,21 @@ public class Marine extends Character {
      * @param wallet falls back to 0 if negative
      * @param marineRank falls back to ENSIGN if null
      */
-    public Marine(String name, String alias, String origin, int wallet, MarineRank marineRank){
+    public Marine(String name, String alias, String origin, long wallet, MarineRank marineRank){
         super(name, alias, origin, wallet);
 
         this.marineRank = (marineRank != null) ? marineRank : MarineRank.ENSIGN;  // Starts at the bottom
+        this.marineCorps = null;
+    }
+
+
+    /** LOAD CONSTRUCTOR
+     * Purpose: Rebuilds a marine from a save file with its original ID preserved.
+     * @param id the stored character ID
+     */
+    public Marine(int id, String name, String alias, String origin, long wallet, MarineRank marineRank){
+        super(id, name, alias, origin, wallet);
+        this.marineRank = (marineRank != null) ? marineRank : MarineRank.ENSIGN;
         this.marineCorps = null;
     }
 
@@ -61,19 +73,26 @@ public class Marine extends Character {
         this.marineCorps = null;
     }
 
-    /** Purpose: Prints rank-specific flavor text for this marine. */
+    /**
+     * Purpose: Sets this marine's rank directly (used by the edit dialog).
+     * @param rank ignored if null
+     */
+    public void setMarineRank(MarineRank rank){
+        if(rank != null) this.marineRank = rank;
+    }
+
     @Override
     public void performDuty(){
         switch(this.marineRank){
-            case ENSIGN -> System.out.println("Following a superior's orders.");
-            case LIEUTENANT -> System.out.println("Fulfilling my duties now sir!");
-            case COMMANDER -> System.out.println("What we having there mates?");
-            case CAPTAIN -> System.out.println("About to have a coffee break in 5.");
-            case COMMODORE -> System.out.println("What are you saying? I need to take over?");
-            case REAR_ADMIRAL -> System.out.println("What am I even doing here, what a drag.");
-            case VICE_ADMIRAL -> System.out.println("Time to lead a buster fleet call!");
-            case ADMIRAL -> System.out.println("Six-Seven!");
-            case FLEET_ADMIRAL -> System.out.println("Each one of you! Man up and take charge!");
+            case ENSIGN -> System.out.println("Following a superior's orders...");
+            case LIEUTENANT -> System.out.println("Fulfilling my duties...");
+            case COMMANDER -> System.out.println("Overseeing low-rank officers...");
+            case CAPTAIN -> System.out.println("Commanding a marine branch to capture pirates...");
+            case COMMODORE -> System.out.println("Taking on authoritative duties...");
+            case REAR_ADMIRAL -> System.out.println("Commanding low-ranked marines...");
+            case VICE_ADMIRAL -> System.out.println("Leading a Buster Call fleet...");
+            case ADMIRAL -> System.out.println("Serving as one of the Marine's three greatest powers...");
+            case FLEET_ADMIRAL -> System.out.println("Overseeing marine operations...");
             default -> System.out.println("Patrolling the seas...");
         }
     }
