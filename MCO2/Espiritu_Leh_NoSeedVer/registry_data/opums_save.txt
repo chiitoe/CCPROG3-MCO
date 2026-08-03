@@ -1,0 +1,5 @@
+# OPUMS save file - do not hand-edit unless you know the format
+[CHARACTERS]
+[FRUITS]
+[CREWS]
+[CORPS]

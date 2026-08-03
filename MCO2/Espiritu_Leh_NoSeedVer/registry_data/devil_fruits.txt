@@ -1,0 +1,3 @@
+# TYPE|ID|NAME|CATEGORY|ABILITY|OWNER|PAST_OWNERS
+FRUIT|1|Gomu Gomu no Mi|PARAMECIA|Rubber body|Monkey D. Luffy|0
+FRUIT|2|Gomu Gomu no Mi|PARAMECIA|Rubber body|Monkey D. Luffy|0

@@ -1,0 +1,5 @@
+# TYPE|ID|NAME|LOCATION|LEADER|SIZE|FUNDS_OR_BOUNTY
+CREW|1|Straw Hat Pirates|Going Merry|Monkey D. Luffy|3|477000000
+CREW|2|Straw Hat Pirates|Going Merry|Monkey D. Luffy|3|477000000
+CORPS|1|Marine G-5|New World|Doberman|1|500000
+CORPS|2|Marine G-5|New World|Doberman|1|500000

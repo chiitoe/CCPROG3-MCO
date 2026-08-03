@@ -1,0 +1,19 @@
+# TYPE|ID|NAME|ALIAS|ORIGIN|STATUS|FRUIT|WALLET
+Pirate|1|Monkey D. Luffy|Straw Hat|East Blue|FREE|Gomu Gomu no Mi|100
+Pirate|2|Roronoa Zoro|Pirate Hunter|East Blue|FREE|None|200
+Pirate|3|Nami|Cat Burglar|Cocoyasi Village|FREE|None|300
+Pirate|4|Buggy|Clown|East Blue|FREE|None|50
+Marine|5|Smoker|White Hunter|Loguetown|FREE|None|10000
+Marine|6|Tashigi|Tashigi|Loguetown|FREE|None|3000
+Civilian|7|Makino|Makino|Windmill Village|FREE|None|1000
+Civilian|8|Yasopp|Yasopp|Syrup Village|FREE|None|800
+PirateHunter|9|Johnny|Johnny|East Blue|FREE|None|500
+Pirate|10|Monkey D. Luffy|Straw Hat|East Blue|FREE|Gomu Gomu no Mi|100
+Pirate|11|Roronoa Zoro|Pirate Hunter|East Blue|FREE|None|200
+Pirate|12|Nami|Cat Burglar|Cocoyasi Village|FREE|None|300
+Pirate|13|Buggy|Clown|East Blue|FREE|None|50
+Marine|14|Smoker|White Hunter|Loguetown|FREE|None|10000
+Marine|15|Tashigi|Tashigi|Loguetown|FREE|None|3000
+Civilian|16|Makino|Makino|Windmill Village|FREE|None|1000
+Civilian|17|Yasopp|Yasopp|Syrup Village|FREE|None|800
+PirateHunter|18|Johnny|Johnny|East Blue|FREE|None|500
