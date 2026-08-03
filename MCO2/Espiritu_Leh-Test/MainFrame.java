@@ -43,6 +43,8 @@ public final class MainFrame extends JFrame {
     public final JButton navCaptures = Theme.gold("Bounty Office");
     /** Nav button for the leaderboard screen. */
     public final JButton navWanted = Theme.gold("Most Wanted");
+    /** Nav button that populates the registry with sample starting data. */
+    public final JButton fileSeed = Theme.gold("Load Sample Data");
     /** Nav button for the file screen. */
     public final JButton navFiles = Theme.gold("Archives");
 
@@ -388,7 +390,7 @@ public final class MainFrame extends JFrame {
         JPanel buttons = new JPanel();
         buttons.setLayout(new BoxLayout(buttons, BoxLayout.Y_AXIS));
         buttons.setOpaque(false);
-        for(JButton b : new JButton[]{fileSave, fileLoad, fileInfo, fileArchive, fileClear}){
+        for(JButton b : new JButton[]{fileSave, fileLoad, fileInfo, fileArchive, fileSeed, fileClear}){
             buttons.add(b);
             buttons.add(Box.createVerticalStrut(8));
         }

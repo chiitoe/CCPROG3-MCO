@@ -485,6 +485,15 @@ public class Driver {
     }
 
     /**
+     * Purpose: Menu action - populates the registry with sample starting data
+     * via DataSeeder, so the program has records to work with immediately.
+     */
+    private static void loadSampleData(){
+        DataSeeder.seed(charDB, affDB, fruitDB);
+        System.out.println("Sample data loaded.");
+    }
+
+    /**
      * Purpose: Entry point - runs the main menu loop until the user exits.
      * @param args unused
      */
@@ -507,6 +516,7 @@ public class Driver {
             System.out.println("[12] Register a Capture");
             System.out.println("[13] View Capture History");
             System.out.println("[14] File Handling");
+            System.out.println("[15] Load Sample Data");
             System.out.println("[15] Exit");
 
             int choose = readInt("Choose an option: ");
@@ -526,7 +536,8 @@ public class Driver {
                 case 12 -> registerCapture();
                 case 13 -> bountyDB.viewAllCaptures();
                 case 14 -> fileMenu();
-                case 15 -> running = false;
+                case 15 -> loadSampleData();
+                case 16 -> running = false;
                 default -> System.out.println("Invalid choice.");
             }
         }

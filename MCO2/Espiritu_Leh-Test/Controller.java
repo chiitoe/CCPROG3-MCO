@@ -93,6 +93,7 @@ public class Controller {
         view.fileInfo.addActionListener(e -> { echo(capture(FileDirectory::showFileInfo)); status("File information listed."); });
         view.fileArchive.addActionListener(e -> archiveFile());
         view.fileClear.addActionListener(e -> clearLog());
+        view.fileSeed.addActionListener(e -> seedInitialData());
     }
 
     /**
@@ -761,5 +762,14 @@ public class Controller {
             frame.setVisible(true);
             frame.show("characters");
         });
+    }
+
+    /**
+     * Purpose: Seeds initial data.
+     */
+    private void seedInitialData(){
+        DataSeeder.seed(charDB, affDB, fruitDB);
+        refreshAll();
+        status("Sample data loaded.");
     }
 }
